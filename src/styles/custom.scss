@@ -1,0 +1,391 @@
+// ============================================================
+// DESIGN TOKENS
+// Subject: junior web developer portfolio
+// Concept: a "build log" — the page reads like a running log of
+// work, with commit-style eyebrows and file-tab shaped cards.
+// ============================================================
+
+// ---- Palette -------------------------------------------------
+$ink:        #10131A; // page background
+$surface:    #171B25; // card / panel background
+$surface-2:  #1F2432; // raised panel (nav, hover states)
+$text:       #F1EDE4; // warm off-white body text
+$text-muted: #9CA0AC; // secondary text
+$line:       rgba(241, 237, 228, 0.09); // hairline borders
+$amber:      #F2B33D; // primary accent — status / CTA
+$teal:       #4FD1C5; // secondary accent — links / tags
+$danger:     #E5654A;
+
+// ---- Bootstrap variable overrides (must precede bootstrap import) ----
+$body-bg: $ink;
+$body-color: $text;
+$primary: $amber;
+$secondary: $teal;
+$dark: $surface;
+$light: $text;
+
+$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-family-monospace: 'JetBrains Mono', 'SFMono-Regular', monospace;
+$headings-font-family: 'Space Grotesk', 'Inter', sans-serif;
+$headings-font-weight: 600;
+
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-color: $line;
+
+$link-color: $teal;
+$link-hover-color: lighten($teal, 10%);
+$link-decoration: none;
+
+@import "bootstrap/scss/bootstrap";
+
+// ============================================================
+// GLOBAL
+// ============================================================
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: $ink;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgba(242, 179, 61, 0.06), transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(79, 209, 197, 0.05), transparent 45%);
+}
+
+::selection {
+  background: $amber;
+  color: $ink;
+}
+
+// Focus visibility (accessibility floor from design skill)
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid $amber;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+// ============================================================
+// SIGNATURE ELEMENT: the "eyebrow" — a mono, numbered label
+// used ONLY where content is genuinely sequential (log entries,
+// numbered project list). Encodes real order, not decoration.
+// ============================================================
+.eyebrow {
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: $teal;
+  text-transform: lowercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $amber;
+    display: inline-block;
+  }
+}
+
+.section-title {
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.02em;
+}
+
+section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid $line;
+}
+
+// ============================================================
+// NAVBAR — slim, IDE-tab inspired, restrained
+// ============================================================
+.site-nav {
+  background: rgba(16, 19, 26, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid $line;
+
+  .navbar-brand {
+    font-family: $font-family-monospace;
+    color: $text;
+    font-weight: 500;
+
+    .brand-dot {
+      color: $amber;
+    }
+  }
+
+  .nav-link {
+    font-family: $font-family-monospace;
+    font-size: 0.9rem;
+    color: $text-muted;
+    padding: 0.5rem 1rem;
+    transition: color 0.15s ease;
+
+    &:hover,
+    &.active {
+      color: $text;
+    }
+  }
+}
+
+// ============================================================
+// HERO
+// ============================================================
+.hero {
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+  border-bottom: 1px solid $line;
+
+  .hero-kicker {
+    font-family: $font-family-monospace;
+    color: $teal;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+
+    .accent {
+      color: $amber;
+    }
+  }
+
+  .hero-lede {
+    font-size: 1.15rem;
+    color: $text-muted;
+    max-width: 42ch;
+  }
+
+  .hero-stats {
+    font-family: $font-family-monospace;
+    font-size: 0.85rem;
+    color: $text-muted;
+
+    strong {
+      color: $text;
+      font-size: 1.5rem;
+      font-family: $headings-font-family;
+      display: block;
+    }
+  }
+}
+
+.btn-signature {
+  background: $amber;
+  color: $ink;
+  font-weight: 600;
+  border: none;
+  padding: 0.65rem 1.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    background: lighten($amber, 5%);
+    color: $ink;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -8px rgba(242, 179, 61, 0.5);
+  }
+}
+
+.btn-outline-signature {
+  border: 1px solid $line;
+  color: $text;
+  padding: 0.65rem 1.5rem;
+  font-weight: 500;
+  transition: border-color 0.15s ease, background 0.15s ease;
+
+  &:hover {
+    border-color: $teal;
+    color: $text;
+    background: rgba(79, 209, 197, 0.08);
+  }
+}
+
+// ============================================================
+// ABOUT
+// ============================================================
+.about-body {
+  color: $text-muted;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+// ============================================================
+// SKILLS — grouped mono chips, not a generic progress-bar wall
+// ============================================================
+.skill-group {
+  margin-bottom: 2rem;
+
+  .skill-group-label {
+    font-family: $font-family-monospace;
+    font-size: 0.8rem;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+  }
+}
+
+.skill-chip {
+  font-family: $font-family-monospace;
+  font-size: 0.85rem;
+  background: $surface;
+  border: 1px solid $line;
+  color: $text;
+  padding: 0.4rem 0.85rem;
+  border-radius: $border-radius;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0.5rem 0.5rem 0;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: $teal;
+    transform: translateY(-2px);
+  }
+}
+
+// ============================================================
+// PROJECTS — "file tab" cards: a colored status dot (deployed /
+// in progress) + mono tag chips + amber left-border on hover,
+// nodding to a diff/changelog without literal terminal chrome.
+// ============================================================
+.project-card {
+  background: $surface;
+  border: 1px solid $line;
+  border-left: 3px solid transparent;
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  transition: border-left-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+
+  &:hover {
+    border-left-color: $amber;
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
+  }
+
+  .project-media {
+    aspect-ratio: 16 / 10;
+    background: $surface-2;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .project-body {
+    padding: 1.5rem;
+  }
+
+  .project-status {
+    font-family: $font-family-monospace;
+    font-size: 0.75rem;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+
+    .dot-live { background: #3FD97F; }
+    .dot-progress { background: $amber; }
+  }
+
+  .project-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-desc {
+    color: $text-muted;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag-chip {
+    font-family: $font-family-monospace;
+    font-size: 0.72rem;
+    color: $teal;
+    background: rgba(79, 209, 197, 0.08);
+    border: 1px solid rgba(79, 209, 197, 0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+}
+
+// ============================================================
+// CONTACT
+// ============================================================
+.contact-section {
+  border-bottom: none;
+
+  .contact-card {
+    background: $surface;
+    border: 1px solid $line;
+    border-radius: $border-radius-lg;
+    padding: 3rem;
+  }
+
+  .contact-link {
+    font-family: $font-family-monospace;
+    font-size: 1rem;
+    color: $text;
+    border: 1px solid $line;
+    border-radius: $border-radius;
+    padding: 0.85rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: border-color 0.15s ease, background 0.15s ease;
+
+    &:hover {
+      color: $text;
+      border-color: $amber;
+      background: rgba(242, 179, 61, 0.06);
+    }
+  }
+}
+
+// ============================================================
+// FOOTER
+// ============================================================
+.site-footer {
+  padding: 2.5rem 0;
+  font-family: $font-family-monospace;
+  font-size: 0.8rem;
+  color: $text-muted;
+}
