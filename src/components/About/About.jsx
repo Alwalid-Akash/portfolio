@@ -9,12 +9,12 @@ function About() {
           </div>
           <div className="col-lg-6">
             <p className="about-body mb-3">
-              Hello! I'm an aspiring full-stack web developer who enjoys creating modern and user-friendly web applications. I have a basic understanding of HTML, CSS, JavaScript, React, Node.js, Express.js, and Bootstrap, and I'm currently expanding my knowledge by building projects and learning new technologies. My goal is to become a skilled full-stack developer and contribute to impactful software solutions.
+              I am an aspiring Full-Stack Developer passionate about creating modern, user-friendly web applications that solve real-world problems. I enjoy turning ideas into practical solutions and continuously improving my skills through learning and hands-on projects.
+
 
             </p>
             <p className="about-body">
-              I have a strong interest in building scalable web applications and solving real-world problems through technology. I enjoy experimenting with new tools, improving my development workflow, and creating projects that combine functionality with a great user experience.
-
+              Dedicated to creating clean, maintainable, and high-performance solutions while continuously expanding my knowledge and staying up to date with modern technologies. Eager to contribute to innovative projects, collaborate with diverse teams, and deliver software that creates meaningful impact.
             </p>
           </div>
         </div>

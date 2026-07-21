@@ -6,15 +6,15 @@
 // ============================================================
 
 // ---- Palette -------------------------------------------------
-$ink:        #10131A; // page background
-$surface:    #171B25; // card / panel background
-$surface-2:  #1F2432; // raised panel (nav, hover states)
-$text:       #F1EDE4; // warm off-white body text
+$ink: #10131A; // page background
+$surface: #171B25; // card / panel background
+$surface-2: #1F2432; // raised panel (nav, hover states)
+$text: #F1EDE4; // warm off-white body text
 $text-muted: #9CA0AC; // secondary text
-$line:       rgba(241, 237, 228, 0.09); // hairline borders
-$amber:      #F2B33D; // primary accent — status / CTA
-$teal:       #4FD1C5; // secondary accent — links / tags
-$danger:     #E5654A;
+$line: rgba(241, 237, 228, 0.09); // hairline borders
+$amber: #F2B33D; // primary accent — status / CTA
+$teal: #4FD1C5; // secondary accent — links / tags
+$danger: #E5654A;
 
 // ---- Bootstrap variable overrides (must precede bootstrap import) ----
 $body-bg: $ink;
@@ -218,6 +218,15 @@ section {
   }
 }
 
+.hero-photo {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  /* or 16px for rounded-square instead of circle */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
 // ============================================================
 // ABOUT
 // ============================================================
@@ -314,8 +323,13 @@ section {
       border-radius: 50%;
     }
 
-    .dot-live { background: #3FD97F; }
-    .dot-progress { background: $amber; }
+    .dot-live {
+      background: #3FD97F;
+    }
+
+    .dot-progress {
+      background: $amber;
+    }
   }
 
   .project-title {
@@ -344,6 +358,118 @@ section {
     border: 1px solid rgba(79, 209, 197, 0.2);
     padding: 0.2rem 0.6rem;
     border-radius: 999px;
+  }
+}
+
+// ============================================================
+// EXPERIENCE — vertical log/timeline, consistent with the
+// "build log" concept: dated entries, status dot, mono meta.
+// ============================================================
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  border-left: 1px solid $line;
+}
+
+.timeline-entry {
+  position: relative;
+  padding-bottom: 3rem;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -2.4rem;
+  top: 0.35rem;
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+    box-shadow: 0 0 0 4px $ink;
+  }
+
+  .dot-live {
+    background: #3FD97F;
+  }
+
+  .dot-progress {
+    background: $amber;
+  }
+}
+
+.timeline-dates {
+  font-family: $font-family-monospace;
+  font-size: 0.78rem;
+  color: $text-muted;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-title {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+
+  .timeline-at {
+    font-weight: 400;
+    color: $teal;
+  }
+}
+
+.timeline-location {
+  color: $text-muted;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-points {
+  color: $text-muted;
+  font-size: 0.95rem;
+  padding-left: 1.1rem;
+  margin-bottom: 0;
+
+  li {
+    margin-bottom: 0.4rem;
+  }
+}
+
+// ============================================================
+// EDUCATION — reuses the project-card shape for visual
+// consistency, without the media/tags that don't apply here.
+// ============================================================
+.edu-card {
+  background: $surface;
+  border: 1px solid $line;
+  border-left: 3px solid transparent;
+  border-radius: $border-radius-lg;
+  padding: 1.5rem;
+  height: 100%;
+  transition: border-left-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-left-color: $teal;
+    transform: translateY(-4px);
+  }
+
+  .edu-school {
+    color: $teal;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  .edu-meta {
+    font-family: $font-family-monospace;
+    font-size: 0.8rem;
+    color: $text-muted;
   }
 }
 
