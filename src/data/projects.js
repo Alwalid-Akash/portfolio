@@ -1,28 +1,29 @@
 // Add/edit your projects here. Each object maps directly to a project card.
 // status: "live" (deployed, has a demo link) or "progress" (still building)
-
+import HomeHero from "../assets/images/homeHero.png";
+import img from "../assets/images/img.png";
 const projects = [
   {
     id: 1,
     title: 'Project One',
     description:
-      'A short, specific line on the problem this solves and who it is for — not just the tech you used.',
-    image: 'https://placehold.co/640x400/1F2432/9CA0AC?text=Project+One',
-    tags: ['React', 'Node.js', 'MongoDB'],
+      'A full-stack German traffic accident analytics system to integrate official Unfallatlas, GV-ISys, and Regionalatlas data into a queryable web API and frontend.',
+    image: img,
+    tags: ['React', 'Node.js/Express', 'PostgreSQL', 'Bootstrap'],
     status: 'live',
-    liveLink: '#',
-    githubLink: '#',
+    liveLink: 'https://german-traffic-data.vercel.app/',
+    githubLink: 'https://github.com/Alwalid-Akash/German_traffic_data',
   },
   {
     id: 2,
     title: 'Project Two',
     description:
-      'What it does, one decision you made and why, and one thing you learned building it.',
-    image: 'https://placehold.co/640x400/1F2432/9CA0AC?text=Project+Two',
-    tags: ['JavaScript', 'API', 'CSS'],
+      'Designed and developed a responsive Zerodha clone with a modern React frontend, trading dashboard, and secure backend APIs.',
+    image: HomeHero,
+    tags: ['React ', 'REST_API', 'BOOTSTRAP', 'NODE.JS/EXPRESS.JS', 'MONGODB_ATLAS'],
     status: 'live',
-    liveLink: '#',
-    githubLink: '#',
+    liveLink: "https://zerodha-website-ecru.vercel.app",
+    githubLink: "https://github.com/Alwalid-Akash/ZERODHA_WEBSITE",
   },
   {
     id: 3,
