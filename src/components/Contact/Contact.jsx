@@ -1,7 +1,7 @@
 const CONTACT_LINKS = [
-  { label: 'you@email.com', href: 'mailto:you@email.com', icon: '✉' },
-  { label: 'github.com/yourhandle', href: 'https://github.com/yourhandle', icon: '⌥' },
-  { label: 'linkedin.com/in/yourname', href: 'https://linkedin.com/in/yourname', icon: 'in' },
+  { label: 'alwalidakash@gmail.com', href: 'mailto:alwalidakash@gmail.com', icon: '✉' },
+  { label: 'github.com/Alwalid-Akash', href: 'https://github.com/Alwalid-Akash', icon: '⌥' },
+  { label: 'linkedin.com/in/Md Al Walid', href: 'https://linkedin.com/in/md-alwalid', icon: 'in' },
 ];
 
 function Contact() {

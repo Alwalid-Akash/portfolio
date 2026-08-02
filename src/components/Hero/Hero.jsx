@@ -28,8 +28,8 @@ function Hero() {
 
             <div className="row hero-stats g-4">
               <div className="col-4 col-sm-3">
-                <strong>3+</strong>
-                projects shipped
+                <strong>2+</strong>
+                projects in live
               </div>
               <div className="col-4 col-sm-3">
                 <strong>6mo</strong>
