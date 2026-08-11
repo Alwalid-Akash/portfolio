@@ -16,6 +16,17 @@ const projects = [
   },
   {
     id: 2,
+    title: 'Notes App — Full-Stack CRUD & Authentication',
+    description:
+      'A full-stack notes management application with JWT authentication, protected REST APIs, user-specific CRUD operations, and a responsive React interface.',
+    image: 'https://placehold.co/640x400/1F2432/9CA0AC?text=Project+Three',
+    tags: ['React', 'Vite', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Axios'],
+    status: 'progress',
+    liveLink: 'https://your-vercel-app.vercel.app',
+    githubLink: 'https://github.com/Alwalid-Akash/note_clener',
+  },
+  {
+    id: 3,
     title: 'Project Two',
     description:
       'Designed and developed a responsive Zerodha clone with a modern React frontend, trading dashboard, and secure backend APIs.',
@@ -25,17 +36,7 @@ const projects = [
     liveLink: "https://zerodha-website-ecru.vercel.app",
     githubLink: "https://github.com/Alwalid-Akash/ZERODHA_WEBSITE",
   },
-  {
-    id: 3,
-    title: 'Project Three',
-    description:
-      'Still shipping this one — describe the current milestone and what is left.',
-    image: 'https://placehold.co/640x400/1F2432/9CA0AC?text=Project+Three',
-    tags: ['React', 'Vite', 'Bootstrap'],
-    status: 'progress',
-    liveLink: '#',
-    githubLink: '#',
-  },
+
 ];
 
 export default projects;
