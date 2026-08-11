@@ -4,8 +4,8 @@
 const experience = [
   {
     id: 1,
-    role: 'Associate',
-    company: 'Quantanite',
+    role: 'Associate - Research & Development (R&D)',
+    company: 'Quantanite | Multinational Company',
     location: 'Dhaka, Bangladesh',
     start: 'Dec 2022',
     end: 'Sep 2024',

@@ -2,14 +2,15 @@
 // status: "live" (deployed, has a demo link) or "progress" (still building)
 import HomeHero from "../assets/images/homeHero.png";
 import img from "../assets/images/img.png";
+import note from "../assets/images/note.png";
 const projects = [
   {
     id: 1,
-    title: 'Project One',
+    title: 'German Traffic Accident Analytics Platform',
     description:
-      'A full-stack German traffic accident analytics system to integrate official Unfallatlas, GV-ISys, and Regionalatlas data into a queryable web API and frontend.',
+      'A reproducible full-stack analytics system that integrates official German open-data sources. The project extracts, transforms, normalizes, and loads heterogeneous datasets into a structured PostgreSQL database, then exposes accident statistics, regional comparisons, metadata, and cross-source analytical queries through a REST API and React frontend.',
     image: img,
-    tags: ['React', 'Node.js/Express', 'PostgreSQL', 'Bootstrap'],
+    tags: ['React', 'Node.js/Express.js', 'PostgreSQL', 'Bootstrap', 'Swagger/OpenAPI', 'REST API', 'Render', 'Vercel'],
     status: 'live',
     liveLink: 'https://german-traffic-data.vercel.app/',
     githubLink: 'https://github.com/Alwalid-Akash/German_traffic_data',
@@ -19,24 +20,36 @@ const projects = [
     title: 'Notes App — Full-Stack CRUD & Authentication',
     description:
       'A full-stack notes management application with JWT authentication, protected REST APIs, user-specific CRUD operations, and a responsive React interface.',
-    image: 'https://placehold.co/640x400/1F2432/9CA0AC?text=Project+Three',
-    tags: ['React', 'Vite', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Axios'],
-    status: 'progress',
-    liveLink: 'https://your-vercel-app.vercel.app',
+    image: note,
+    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Axios'],
+    status: 'live',
+    liveLink: 'https://note-clener.vercel.app',
     githubLink: 'https://github.com/Alwalid-Akash/note_clener',
   },
   {
     id: 3,
-    title: 'Project Two',
+    title: ' Zerodha Clone – Trading Dashboard',
     description:
-      'Designed and developed a responsive Zerodha clone with a modern React frontend, trading dashboard, and secure backend APIs.',
+      'A full‑stack web application that replicates the core features of the Zerodha trading platform. Users can view live watchlists, track holdings and positions, place buy/sell orders, manage funds, and visualize portfolio performance – all connected to a live backend with MongoDB Atlas.',
     image: HomeHero,
     tags: ['React ', 'REST_API', 'BOOTSTRAP', 'NODE.JS/EXPRESS.JS', 'MONGODB_ATLAS'],
     status: 'live',
     liveLink: "https://zerodha-website-ecru.vercel.app",
     githubLink: "https://github.com/Alwalid-Akash/ZERODHA_WEBSITE",
   },
-
+  {
+    id: 4,
+    title: 'Project Count',
+    description:
+      'Still shipping this one — describe the current milestone and what is left.',
+    image: 'https://placehold.co/640x400/1F2432/9CA0AC?text=Project+Count',
+    tags: ['React', 'Vite', 'Bootstrap'],
+    status: 'progress',
+    liveLink: '#',
+    githubLink: '#',
+  },
 ];
+
+
 
 export default projects;
