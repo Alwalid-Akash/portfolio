@@ -19,7 +19,7 @@ const projects = [
     id: 2,
     title: 'Notes App — Full-Stack CRUD & Authentication',
     description:
-      'A full-stack notes management application with JWT authentication, protected REST APIs, user-specific CRUD operations, and a responsive React interface.',
+      'A full-stack Notes Management application featuring JWT authentication, protected REST APIs, user-specific CRUD operations, password reset functionality, note search, and a responsive React interface built with Bootstrap.',
     image: note,
     tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Axios'],
     status: 'live',
