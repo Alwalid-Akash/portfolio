@@ -21,7 +21,7 @@ const projects = [
     description:
       'A full-stack Notes Management application featuring JWT authentication, protected REST APIs, user-specific CRUD operations, password reset functionality, note search, and a responsive React interface built with Bootstrap.',
     image: note,
-    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Axios'],
+    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     status: 'live',
     liveLink: 'https://note-clener.vercel.app',
     githubLink: 'https://github.com/Alwalid-Akash/note_clener',
