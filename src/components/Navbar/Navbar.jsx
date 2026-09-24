@@ -43,7 +43,7 @@ function Navbar() {
             <li className="nav-item ms-md-2">
               <a
                 className="btn btn-signature btn-sm"
-                href="/Md_Alwalid_CV.pdf"
+                href="/Md_Al_Walid_CV.pdf"
                 target="_blank"
                 rel="noreferrer"
               >
