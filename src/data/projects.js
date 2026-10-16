@@ -19,11 +19,11 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Notes App — Full-Stack CRUD & Authentication',
+    title: 'Notes App — Full-Stack Web Application with AI Writing Assistance',
     description:
-      'A full-stack Notes Management application featuring JWT authentication, protected REST APIs, user-specific CRUD operations, password reset functionality, note search, and a responsive React interface built with Bootstrap.',
+      'A full-stack notes management application that enables users to securely create, organize, edit and manage personal notes. The application integrates Google Gemini API to assist with grammar correction, writing improvement, professional rewriting and text summarization.',
     image: note,
-    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Docker', 'GitHub Actions'],
+    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Docker', 'GitHub Actions', 'Generative AI', 'LLM API Integration', 'Gemini API'],
     status: 'live',
     liveLink: 'https://note-clener.vercel.app',
     githubLink: 'https://github.com/Alwalid-Akash/note_clener',
