@@ -23,7 +23,7 @@ const projects = [
     description:
       'A full-stack Notes Management application featuring JWT authentication, protected REST APIs, user-specific CRUD operations, password reset functionality, note search, and a responsive React interface built with Bootstrap.',
     image: note,
-    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT'],
+    tags: ['React', 'Bootstrap', 'Node.js', 'Express', 'MongoDB', 'JWT', 'Docker', 'GitHub Actions'],
     status: 'live',
     liveLink: 'https://note-clener.vercel.app',
     githubLink: 'https://github.com/Alwalid-Akash/note_clener',
@@ -34,7 +34,7 @@ const projects = [
     description:
       'A reproducible full-stack analytics system that integrates official German open-data sources. The project extracts, transforms, normalizes, and loads heterogeneous datasets into a structured PostgreSQL database, then exposes accident statistics, regional comparisons, metadata, and cross-source analytical queries through a REST API and React frontend.',
     image: img,
-    tags: ['React', 'Node.js/Express.js', 'PostgreSQL', 'Bootstrap', 'Swagger/OpenAPI', 'REST API', 'Render', 'Vercel'],
+    tags: ['React', 'Node.js/Express.js', 'PostgreSQL', 'Bootstrap', 'Swagger/OpenAPI', 'REST API', 'Docker', 'GitHub Actions', 'Render', 'Vercel'],
     status: 'live',
     liveLink: 'https://german-traffic-data.vercel.app/',
     githubLink: 'https://github.com/Alwalid-Akash/German_traffic_data',

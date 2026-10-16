@@ -13,11 +13,11 @@ const skillGroups = [
   },
   {
     label: 'Tools,  AI Tools, & Workflow',
-    items: ['GitHub', 'GPT', 'VS Code', 'Claude (Beginer)'],
+    items: ['GitHub', 'Docker', 'GitHub Actions (CI/CD)', 'GPT', 'VS Code', 'Claude (Beginer)'],
   },
   {
     label: 'Currently learning',
-    items: ['Next.js'],
+    items: ['GitHub Actions (CI/CD)', 'TyprScript'],
   },
 ];
 
