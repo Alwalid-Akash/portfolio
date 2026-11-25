@@ -1,20 +1,26 @@
 function About() {
   return (
-    <section id="about">
+    <section id="about" className="section">
       <div className="container">
-        <div className="row">
-          <div className="col-lg-6">
-            <p className="eyebrow">01 — about</p>
-            <h2 className="section-title">A bit about how I got here</h2>
+        <div className="row g-4">
+          <div className="col-lg-4">
+            <h2>About</h2>
           </div>
-          <div className="col-lg-6">
-            <p className="about-body mb-3">
-              I am an aspiring Full-Stack Developer passionate about creating modern, user-friendly web applications that solve real-world problems. I enjoy turning ideas into practical solutions and continuously improving my skills through learning and hands-on projects.
-
-
+          <div className="col-lg-7 about-body">
+            <p>
+              Before my master’s I spent two years at Quantanite making datasets for AI training
+              accurate and consistent. That job taught me to care about edge cases, to ask
+              clients what they actually need, and to fix the process instead of the same
+              mistake twice.
             </p>
-            <p className="about-body">
-              Dedicated to creating clean, maintainable, and high-performance solutions while continuously expanding my knowledge and staying up to date with modern technologies. Eager to contribute to innovative projects, collaborate with diverse teams, and deliver software that creates meaningful impact.
+            <p>
+              Now I study Web Engineering at TU Chemnitz and build full-stack projects on the
+              side. I like the parts of a project that are easy to skip: tests, error messages,
+              rate limits and a README that tells you how to run it.
+            </p>
+            <p>
+              I’m looking for a team where I can ship real features, get code reviews and learn
+              from people who have done this longer than I have.
             </p>
           </div>
         </div>

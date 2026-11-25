@@ -1,51 +1,25 @@
+import BrowserFrame from '../shared/BrowserFrame';
+import ProjectLinks from './ProjectLinks';
+
+// Card for smaller projects.
 function ProjectCard({ project }) {
-  const { title, description, image, tags, status, liveLink, githubLink } =
-    project;
+  const { title, summary, learned, image, imageAlt, stack, liveLink } = project;
 
   return (
-    <div className="project-card">
-      <div className="project-media">
-        <img src={image} alt={`${title} preview`} loading="lazy" />
-      </div>
-      <div className="project-body">
-        <div className="project-status">
-          <span
-            className={`dot ${status === 'live' ? 'dot-live' : 'dot-progress'}`}
-          />
-          {status === 'live' ? 'deployed' : 'in progress'}
-        </div>
-
-        <h3 className="project-title h5">{title}</h3>
-        <p className="project-desc">{description}</p>
-
-        <div className="tag-row">
-          {tags.map((tag) => (
-            <span className="tag-chip" key={tag}>
-              {tag}
-            </span>
+    <article className="project-card">
+      <BrowserFrame src={image} alt={imageAlt} url={liveLink} size="small" />
+      <div className="project-card-body">
+        <h4>{title}</h4>
+        <p>{summary}</p>
+        {learned && <p className="project-card-note">{learned}</p>}
+        <ul className="stack-list" aria-label="Tech stack">
+          {stack.map((tech) => (
+            <li key={tech}>{tech}</li>
           ))}
-        </div>
-
-        <div className="d-flex gap-2">
-          <a
-            href={liveLink}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-signature btn-sm"
-          >
-            Live demo
-          </a>
-          <a
-            href={githubLink}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-outline-signature btn-sm"
-          >
-            Code
-          </a>
-        </div>
+        </ul>
+        <ProjectLinks project={project} />
       </div>
-    </div>
+    </article>
   );
 }
 

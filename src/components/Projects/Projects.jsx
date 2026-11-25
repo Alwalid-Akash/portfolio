@@ -1,20 +1,38 @@
 import projects from '../../data/projects';
+import CaseStudy from './CaseStudy';
 import ProjectCard from './ProjectCard';
 
 function Projects() {
-  return (
-    <section id="projects">
-      <div className="container">
-        <p className="eyebrow">03 — projects</p>
-        <h2 className="section-title">Things I've built</h2>
+  const featured = projects.filter((p) => p.featured);
+  const smaller = projects.filter((p) => !p.featured);
 
-        <div className="row g-4">
-          {projects.map((project) => (
-            <div className="col-md-6 col-lg-4" key={project.id}>
-              <ProjectCard project={project} />
-            </div>
+  return (
+    <section id="work" className="section">
+      <div className="container">
+        <div className="section-head">
+          <h2>Selected work</h2>
+          <p>
+            Each project shows what I built, the decisions behind it, and what I would still
+            fix. All the code is public.
+          </p>
+        </div>
+
+        <div className="case-list">
+          {featured.map((project) => (
+            <CaseStudy project={project} key={project.id} />
           ))}
         </div>
+
+        {smaller.length > 0 && (
+          <div className="smaller-projects">
+            <h3 className="subhead">Smaller projects</h3>
+            <div className="project-grid">
+              {smaller.map((project) => (
+                <ProjectCard project={project} key={project.id} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

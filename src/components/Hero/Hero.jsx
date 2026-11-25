@@ -1,63 +1,61 @@
-// import profileImage from "../assets/profile.jpg"; // Change to your image path
+// The facts answer a hiring manager's first questions: hours, start, languages.
+const FACTS = [
+  { term: 'Available', detail: 'Immediately, 20 hours a week during the semester' },
+  { term: 'Based in', detail: 'Chemnitz, Germany' },
+  { term: 'Studying', detail: 'MSc Web Engineering, TU Chemnitz (5th semester)' },
+  { term: 'Languages', detail: 'English B2, German A2 (learning), Bengali native' },
+  { term: 'Before that', detail: '2 years at Quantanite preparing datasets for AI training' },
+];
 
 function Hero() {
   return (
     <header id="top" className="hero">
       <div className="container">
-        <div className="row align-items-center">
-
-          {/* Left Section */}
-          <div className="col-lg-7">
-            <p className="hero-kicker">// junior web developer, open to work</p>
-
-            <h1 className="mb-4">
-              I build clean, <span className="accent">functional</span> interfaces
-              for the web.
-            </h1>
-
-            <p className="hero-lede mb-4">
-              Focused on React and modern JavaScript. I like turning rough ideas
-              into fast, accessible products—and I'm looking for my first
-              working-student, part-time, or full-time role to keep doing that.
+        <div className="row g-4 g-lg-5 align-items-end">
+          <div className="col-lg-7 hero-reveal">
+            <p className="availability">
+              <span className="availability-dot" aria-hidden="true" />
+              Open to Werkstudent and internship roles
             </p>
 
-            <div className="d-flex flex-wrap gap-3 mb-5">
-              <a href="#projects" className="btn btn-signature">
-                View Projects
+            <h1 className="hero-name">Md Al Walid</h1>
+
+            <p className="hero-lede">
+              Full-stack web developer. I build React and Node.js apps end to end, from the
+              database schema to the deploy pipeline.
+            </p>
+
+            <p className="hero-de" lang="de">
+              Werkstudent Full-Stack-Webentwicklung, ab sofort, 20 Std./Woche. Interviews gern auf
+              Englisch.
+            </p>
+
+            <div className="hero-actions">
+              <a href="#shop" className="btn-primary-solid">
+                Read the shop case study
               </a>
-
-              <a href="#contact" className="btn btn-outline-signature">
-                Get In Touch
+              <a href="/Md_Al_Walid_CV.pdf" className="btn-quiet" target="_blank" rel="noreferrer">
+                CV (PDF)
               </a>
-            </div>
-
-            <div className="row hero-stats g-4">
-              <div className="col-4">
-                {/* <strong>2+</strong>
-                <p>Projects Live</p> */}
-              </div>
-
-              <div className="col-4">
-                {/* <strong>6mo</strong>
-                <p>Building with React</p> */}
-              </div>
-
-              <div className="col-4">
-                {/* <strong>100%</strong>
-                <p>Open to Feedback</p> */}
-              </div>
+              <a href="https://github.com/Alwalid-Akash" className="btn-quiet" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/md-alwalid" className="btn-quiet" target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
             </div>
           </div>
 
-          {/* Right Section
-          <div className="col-lg-5 text-center mt-5 mt-lg-0">
-            <img
-              src={profileImage}
-              alt="Md Al Walid"
-              className="img-fluid hero-image"
-            />
-          </div> */}
-
+          <div className="col-lg-5">
+            <dl className="facts">
+              {FACTS.map((fact) => (
+                <div className="fact" key={fact.term}>
+                  <dt>{fact.term}</dt>
+                  <dd>{fact.detail}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </header>

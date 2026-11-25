@@ -1,57 +1,89 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const NAV_LINKS = [
-  { href: '#about', label: 'about' },
-  { href: '#skills', label: 'skills' },
-  { href: '#projects', label: 'projects' },
-  { href: '#contact', label: 'contact' },
+  { id: 'work', label: 'Work' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
+  const [scrolled, setScrolled] = useState(false);
+
+  // Close the mobile menu with the Escape key
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  // Highlight the link of the section currently in the middle of the screen
+  useEffect(() => {
+    const sections = NAV_LINKS.map((link) => document.getElementById(link.id)).filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  // Show a border under the nav once the page is scrolled
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
-    <nav className="site-nav navbar navbar-expand-md fixed-top">
-      <div className="container">
-        <a className="navbar-brand" href="#top">
-          MD AL Walid<span className="brand-dot">.dev</span>
+    <nav className={`site-nav ${scrolled ? 'is-scrolled' : ''}`} aria-label="Main">
+      <div className="container nav-inner">
+        <a className="nav-brand" href="#top">
+          <span className="nav-mark" aria-hidden="true">
+            MW
+          </span>
+          Md Al Walid
         </a>
 
         <button
-          className="navbar-toggler border-0 text-light"
+          className="nav-toggle d-md-none"
           type="button"
-          aria-label="Toggle navigation"
           aria-expanded={open}
+          aria-controls="nav-links"
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="navbar-toggler-icon" />
+          {open ? 'Close' : 'Menu'}
         </button>
 
-        <div className={`collapse navbar-collapse ${open ? 'show' : ''}`}>
-          <ul className="navbar-nav ms-auto align-items-md-center">
-            {NAV_LINKS.map((link) => (
-              <li className="nav-item" key={link.href}>
-                <a
-                  className="nav-link"
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-            <li className="nav-item ms-md-2">
+        <ul id="nav-links" className={`nav-links ${open ? 'is-open' : ''}`}>
+          {NAV_LINKS.map((link) => (
+            <li key={link.id}>
               <a
-                className="btn btn-signature btn-sm"
-                href="/Md_Al_Walid_CV.pdf"
-                target="_blank"
-                rel="noreferrer"
+                href={`#${link.id}`}
+                className={active === link.id ? 'is-active' : ''}
+                aria-current={active === link.id ? 'true' : undefined}
+                onClick={() => setOpen(false)}
               >
-                Resume
+                {link.label}
               </a>
             </li>
-          </ul>
-        </div>
+          ))}
+          <li>
+            <a className="btn-primary-solid btn-small" href="/Md_Al_Walid_CV.pdf" target="_blank" rel="noreferrer">
+              CV (PDF)
+            </a>
+          </li>
+        </ul>
       </div>
     </nav>
   );

@@ -1,144 +1,357 @@
 // ============================================================
-// DESIGN TOKENS
-// Subject: junior web developer portfolio
-// Concept: a "build log" — the page reads like a running log of
-// work, with commit-style eyebrows and file-tab shaped cards.
+// DESIGN NOTES
+// Audience: engineers and hiring managers skimming for ~2 minutes.
+// Concept: an engineer's design review. Each project shows real
+// screenshots in a browser window with the live address, the key
+// numbers, the decisions, and an honest amber "limits" box.
+// Quiet everywhere else: one green accent, one amber, lots of air.
+// Light by default, dark when the visitor's system asks for it.
 // ============================================================
 
-// ---- Palette -------------------------------------------------
-$ink: #10131A; // page background
-$surface: #171B25; // card / panel background
-$surface-2: #1F2432; // raised panel (nav, hover states)
-$text: #F1EDE4; // warm off-white body text
-$text-muted: #9CA0AC; // secondary text
-$line: rgba(241, 237, 228, 0.09); // hairline borders
-$amber: #F2B33D; // primary accent — status / CTA
-$teal: #4FD1C5; // secondary accent — links / tags
-$danger: #E5654A;
+// ---- Bootstrap: only the parts this site uses -----------------
+$font-family-base: 'Public Sans', system-ui, -apple-system, sans-serif;
+$headings-font-family: 'Bricolage Grotesque', 'Public Sans', sans-serif;
+$font-family-monospace: 'IBM Plex Mono', ui-monospace, monospace;
+$enable-dark-mode: false;
+$link-decoration: underline;
 
-// ---- Bootstrap variable overrides (must precede bootstrap import) ----
-$body-bg: $ink;
-$body-color: $text;
-$primary: $amber;
-$secondary: $teal;
-$dark: $surface;
-$light: $text;
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/variables-dark';
+@import 'bootstrap/scss/maps';
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/utilities';
+@import 'bootstrap/scss/root';
+@import 'bootstrap/scss/reboot';
+@import 'bootstrap/scss/containers';
+@import 'bootstrap/scss/grid';
+@import 'bootstrap/scss/helpers';
+@import 'bootstrap/scss/utilities/api';
 
-$font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-family-monospace: 'JetBrains Mono', 'SFMono-Regular', monospace;
-$headings-font-family: 'Space Grotesk', 'Inter', sans-serif;
-$headings-font-weight: 600;
+// ---- Tokens ---------------------------------------------------
+:root {
+  --canvas: #f4f6f8; // page
+  --surface: #ffffff; // cards
+  --sunken: #eceff3; // browser bars, metric strip
+  --ink: #111518; // headings and body
+  --muted: #59636e; // secondary text
+  --rule: #dde2e8; // borders
+  --pass: #0f7a46; // primary action, "shipped"
+  --pass-strong: #0b5f36;
+  --pass-soft: #e2f1e9;
+  --on-pass: #ffffff;
+  --caution: #875800; // limitations
+  --caution-soft: #fcf3df;
+  --caution-rule: #ebcd85;
+  --band: #0f1714; // contact band
+  --band-ink: #eef3f0;
+  --band-muted: #9fb0a7;
+  --shadow-card: 0 1px 2px rgba(17, 21, 24, 0.04), 0 18px 40px -24px rgba(17, 21, 24, 0.18);
+  --shadow-shot: 0 1px 2px rgba(17, 21, 24, 0.06), 0 24px 48px -28px rgba(17, 21, 24, 0.35);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --measure: 64ch;
+}
 
-$border-radius: 0.5rem;
-$border-radius-lg: 0.75rem;
-$border-color: $line;
-
-$link-color: $teal;
-$link-hover-color: lighten($teal, 10%);
-$link-decoration: none;
-
-@import "bootstrap/scss/bootstrap";
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #0d1012;
+    --surface: #151a1e;
+    --sunken: #1c2226;
+    --ink: #e9edf0;
+    --muted: #9ea8b2;
+    --rule: #283036;
+    --pass: #47c985;
+    --pass-strong: #6fd8a0;
+    --pass-soft: #13261c;
+    --on-pass: #0d1012;
+    --caution: #e4b24c;
+    --caution-soft: #251f12;
+    --caution-rule: #574419;
+    --band: #0a1a12;
+    --band-ink: #eef3f0;
+    --band-muted: #93a79c;
+    --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+    --shadow-shot: 0 24px 48px -28px rgba(0, 0, 0, 0.8);
+  }
+}
 
 // ============================================================
 // GLOBAL
 // ============================================================
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
-  background-color: $ink;
-  background-image:
-    radial-gradient(circle at 15% 0%, rgba(242, 179, 61, 0.06), transparent 40%),
-    radial-gradient(circle at 85% 20%, rgba(79, 209, 197, 0.05), transparent 45%);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+a {
+  color: var(--pass);
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+
+  &:hover {
+    color: var(--ink);
+  }
+}
+
+code {
+  font-size: 0.86em;
+  color: var(--ink);
+  background: var(--sunken);
+  border-radius: 4px;
+  padding: 0.08em 0.35em;
 }
 
 ::selection {
-  background: $amber;
-  color: $ink;
+  background: var(--pass);
+  color: var(--on-pass);
 }
 
-// Focus visibility (accessibility floor from design skill)
-a:focus-visible,
-button:focus-visible,
-[tabindex]:focus-visible {
-  outline: 2px solid $amber;
+:focus-visible {
+  outline: 2px solid var(--pass);
   outline-offset: 3px;
+  border-radius: 2px;
+}
+
+// More side padding on phones than Bootstrap's default
+@media (max-width: 575.98px) {
+  .container {
+    padding-inline: 1.25rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.001ms !important;
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
     transition-duration: 0.001ms !important;
   }
 }
 
-// ============================================================
-// SIGNATURE ELEMENT: the "eyebrow" — a mono, numbered label
-// used ONLY where content is genuinely sequential (log entries,
-// numbered project list). Encodes real order, not decoration.
-// ============================================================
-.eyebrow {
-  font-family: $font-family-monospace;
-  font-size: 0.8rem;
-  letter-spacing: 0.06em;
-  color: $teal;
-  text-transform: lowercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 1100;
+  background: var(--ink);
+  color: var(--canvas);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
 
-  &::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: $amber;
-    display: inline-block;
+  &:focus {
+    top: 1rem;
+    color: var(--canvas);
   }
 }
 
-.section-title {
+// ---- Buttons --------------------------------------------------
+.btn-primary-solid,
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   font-weight: 600;
-  margin-bottom: 2.5rem;
-  letter-spacing: -0.02em;
+  font-size: 0.95rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-section {
-  padding-top: 6rem;
-  padding-bottom: 6rem;
-  border-bottom: 1px solid $line;
+.btn-primary-solid {
+  background: var(--pass);
+  border: 1px solid var(--pass);
+  color: var(--on-pass);
+
+  &:hover {
+    background: var(--pass-strong);
+    border-color: var(--pass-strong);
+    color: var(--on-pass);
+  }
+}
+
+.btn-quiet {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+
+  &:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+}
+
+.btn-small {
+  font-size: 0.875rem;
+  padding: 0.45rem 0.85rem;
+}
+
+// ---- Sections ---------------------------------------------------
+.section {
+  padding: 6rem 0;
+
+  h2 {
+    font-size: clamp(2rem, 3.6vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.6rem;
+  }
+}
+
+.section-alt {
+  background: var(--surface);
+  border-block: 1px solid var(--rule);
+}
+
+.section-head {
+  margin-bottom: 3rem;
+  max-width: var(--measure);
+
+  p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    margin: 0;
+  }
+}
+
+.subhead {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
 // ============================================================
-// NAVBAR — slim, IDE-tab inspired, restrained
+// NAV
 // ============================================================
 .site-nav {
-  background: rgba(16, 19, 26, 0.85);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid $line;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: color-mix(in srgb, var(--canvas) 85%, transparent);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
 
-  .navbar-brand {
-    font-family: $font-family-monospace;
-    color: $text;
+  &.is-scrolled {
+    border-bottom-color: var(--rule);
+  }
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  min-height: 4.25rem;
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: $headings-font-family;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--ink);
+  }
+}
+
+.nav-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--canvas);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+}
+
+.nav-toggle {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.8rem;
+}
+
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+
+  a:not(.btn-primary-solid) {
+    position: relative;
+    color: var(--muted);
+    text-decoration: none;
     font-weight: 500;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-sm);
 
-    .brand-dot {
-      color: $amber;
+    &:hover {
+      color: var(--ink);
+    }
+
+    &.is-active {
+      color: var(--ink);
+      background: var(--sunken);
     }
   }
 
-  .nav-link {
-    font-family: $font-family-monospace;
-    font-size: 0.9rem;
-    color: $text-muted;
-    padding: 0.5rem 1rem;
-    transition: color 0.15s ease;
+  .btn-primary-solid {
+    margin-left: 0.6rem;
+  }
+}
 
-    &:hover,
-    &.active {
-      color: $text;
+@media (max-width: 767.98px) {
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem 0 1rem;
+
+    &.is-open {
+      display: flex;
+    }
+
+    .btn-primary-solid {
+      margin: 0.5rem 0 0;
+      justify-content: center;
     }
   }
 }
@@ -147,361 +360,725 @@ section {
 // HERO
 // ============================================================
 .hero {
-  padding-top: 8rem;
-  padding-bottom: 6rem;
-  border-bottom: 1px solid $line;
+  position: relative;
+  padding: 6rem 0 6.5rem;
+  overflow: hidden;
 
-  .hero-kicker {
-    font-family: $font-family-monospace;
-    color: $teal;
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
+  // Faint engineering-paper dots, fading out toward the bottom
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--rule) 1px, transparent 1px);
+    background-size: 22px 22px;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+    pointer-events: none;
   }
 
-  h1 {
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-
-    .accent {
-      color: $amber;
-    }
+  .container {
+    position: relative;
   }
+}
 
-  .hero-lede {
-    font-size: 1.15rem;
-    color: $text-muted;
-    max-width: 42ch;
-  }
+// One orchestrated entrance on page load, hero only
+.hero-reveal > * {
+  animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 
-  .hero-stats {
-    font-family: $font-family-monospace;
-    font-size: 0.85rem;
-    color: $text-muted;
-
-    strong {
-      color: $text;
-      font-size: 1.5rem;
-      font-family: $headings-font-family;
-      display: block;
+  @for $i from 1 through 6 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{($i - 1) * 70}ms;
     }
   }
 }
 
-.btn-signature {
-  background: $amber;
-  color: $ink;
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-weight: 600;
-  border: none;
-  padding: 0.65rem 1.5rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-
-  &:hover {
-    background: lighten($amber, 5%);
-    color: $ink;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px -8px rgba(242, 179, 61, 0.5);
-  }
+  font-size: 0.92rem;
+  color: var(--pass);
+  background: var(--pass-soft);
+  padding: 0.35rem 0.85rem 0.35rem 0.7rem;
+  border-radius: 999px;
+  margin-bottom: 1.75rem;
 }
 
-.btn-outline-signature {
-  border: 1px solid $line;
-  color: $text;
-  padding: 0.65rem 1.5rem;
-  font-weight: 500;
-  transition: border-color 0.15s ease, background 0.15s ease;
-
-  &:hover {
-    border-color: $teal;
-    color: $text;
-    background: rgba(79, 209, 197, 0.08);
-  }
-}
-
-.hero-photo {
-  width: 260px;
-  height: 260px;
-  object-fit: cover;
+.availability-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  /* or 16px for rounded-square instead of circle */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  background: var(--pass);
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--pass);
+    opacity: 0;
+    animation: pulse 2.4s ease-out 1s 3;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+}
+
+.hero-name {
+  font-size: clamp(3.25rem, 9.5vw, 7rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-variation-settings: 'wdth' 88;
+  margin-bottom: 1.6rem;
+}
+
+.hero-lede {
+  font-size: clamp(1.2rem, 2.1vw, 1.5rem);
+  line-height: 1.4;
+  max-width: 32ch;
+  margin-bottom: 1rem;
+}
+
+.hero-de {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.facts {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  padding: 0.4rem 1.5rem;
+  box-shadow: var(--shadow-card);
+  animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) 0.25s both;
+}
+
+.fact {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: 0.95rem 0;
+
+  & + & {
+    border-top: 1px solid var(--rule);
+  }
+
+  dt {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 575.98px) {
+    grid-template-columns: 5.5rem 1fr;
+  }
+}
+
+// ============================================================
+// BROWSER FRAME — screenshots shown with their live address
+// ============================================================
+.browser {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: top center;
+  }
+}
+
+.browser-large {
+  box-shadow: var(--shadow-shot);
+}
+
+.browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: 2.1rem;
+  padding: 0 0.75rem;
+  background: var(--sunken);
+  border-bottom: 1px solid var(--rule);
+}
+
+.browser-dots {
+  display: inline-flex;
+  gap: 0.35rem;
+
+  i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+}
+
+.browser-url {
+  flex: 1;
+  max-width: 22rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 0.1rem 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-small {
+  .browser-bar {
+    height: 1.7rem;
+  }
+
+  .browser-url {
+    font-size: 0.7rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .browser img {
+    filter: brightness(0.88);
+  }
+}
+
+// ============================================================
+// CASE STUDIES — the memorable part of the page
+// ============================================================
+.case-list {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.case-study {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.case-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+
+  @media (min-width: 992px) {
+    grid-template-columns: 5fr 7fr;
+    gap: 3rem;
+    align-items: center;
+  }
+}
+
+.case-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.9rem;
+}
+
+.case-summary {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+
+.stack-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.4rem;
+
+  li {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: var(--sunken);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+// Key numbers: a strip across the card
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0;
+  background: var(--sunken);
+  border-block: 1px solid var(--rule);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.metric {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  padding: 1.25rem clamp(1.25rem, 3vw, 2.75rem);
+  border-right: 1px solid var(--rule);
+
+  &:nth-child(2n) {
+    @media (max-width: 767.98px) {
+      border-right: 0;
+    }
+  }
+
+  &:nth-child(-n + 2) {
+    @media (max-width: 767.98px) {
+      border-bottom: 1px solid var(--rule);
+    }
+  }
+
+  &:last-child {
+    border-right: 0;
+  }
+
+  dd {
+    margin: 0;
+    font-family: $headings-font-family;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  dt {
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+}
+
+.case-sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem 2.5rem;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.case-section {
+  h4 {
+    font-family: $font-family-base;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+
+  ul {
+    padding-left: 1.05rem;
+    margin: 0;
+  }
+
+  li {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 0.55rem;
+
+    &::marker {
+      color: var(--pass);
+    }
+  }
+
+  &.is-caution {
+    grid-column: 1 / -1;
+    background: var(--caution-soft);
+    border: 1px solid var(--caution-rule);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.3rem;
+
+    h4 {
+      color: var(--caution);
+    }
+
+    li {
+      color: var(--ink);
+
+      &::marker {
+        color: var(--caution);
+      }
+    }
+
+    @media (min-width: 768px) {
+      ul {
+        columns: 2;
+        column-gap: 2.5rem;
+      }
+
+      li {
+        break-inside: avoid;
+      }
+    }
+  }
+}
+
+// ---- Smaller projects ----------------------------------------
+.smaller-projects {
+  margin-top: 4.5rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  box-shadow: var(--shadow-card);
+
+  .browser img {
+    aspect-ratio: 16 / 8;
+  }
+}
+
+.project-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem 0.5rem 0.5rem;
+
+  h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 0.97rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .stack-list {
+    margin-top: auto;
+    margin-bottom: 1rem;
+  }
+}
+
+.project-card-note {
+  border-left: 3px solid var(--pass);
+  padding-left: 0.75rem;
+  color: var(--ink) !important;
+}
+
+// ============================================================
+// NOW
+// ============================================================
+.now-item {
+  border-left: 3px solid var(--pass);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+
+    a {
+      color: var(--ink);
+    }
+  }
+
+  p {
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .now-role {
+    color: var(--ink);
+    font-weight: 500;
+  }
+}
+
+// ============================================================
+// SKILLS — confidence levels, strongest first
+// ============================================================
+.skill-group {
+  height: 100%;
+  border-top: 3px solid var(--ink);
+  padding-top: 1.25rem;
+
+  h3 {
+    font-family: $font-family-base;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  li {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+
+  &.level-daily li {
+    background: var(--ink);
+    color: var(--canvas);
+  }
+
+  &.level-shipped {
+    border-top-color: var(--pass);
+
+    li {
+      border: 1px solid var(--rule);
+      background: var(--canvas);
+    }
+  }
+
+  &.level-learning {
+    border-top-color: var(--rule);
+
+    li {
+      border: 1px dashed var(--muted);
+      color: var(--muted);
+    }
+  }
+}
+
+.skills-note {
+  color: var(--muted);
+  margin: 1.75rem 0 0;
+  font-size: 0.95rem;
 }
 
 // ============================================================
 // ABOUT
 // ============================================================
-.about-body {
-  color: $text-muted;
-  font-size: 1.05rem;
-  line-height: 1.75;
-}
+.about-body p {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  max-width: var(--measure);
+  margin-bottom: 1.2rem;
 
-// ============================================================
-// SKILLS — grouped mono chips, not a generic progress-bar wall
-// ============================================================
-.skill-group {
-  margin-bottom: 2rem;
-
-  .skill-group-label {
-    font-family: $font-family-monospace;
-    font-size: 0.8rem;
-    color: $text-muted;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.75rem;
+  &:first-child {
+    font-size: 1.3rem;
+    line-height: 1.5;
   }
-}
 
-.skill-chip {
-  font-family: $font-family-monospace;
-  font-size: 0.85rem;
-  background: $surface;
-  border: 1px solid $line;
-  color: $text;
-  padding: 0.4rem 0.85rem;
-  border-radius: $border-radius;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0 0.5rem 0.5rem 0;
-  transition: border-color 0.15s ease, transform 0.15s ease;
-
-  &:hover {
-    border-color: $teal;
-    transform: translateY(-2px);
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
 // ============================================================
-// PROJECTS — "file tab" cards: a colored status dot (deployed /
-// in progress) + mono tag chips + amber left-border on hover,
-// nodding to a diff/changelog without literal terminal chrome.
-// ============================================================
-.project-card {
-  background: $surface;
-  border: 1px solid $line;
-  border-left: 3px solid transparent;
-  border-radius: $border-radius-lg;
-  overflow: hidden;
-  transition: border-left-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  height: 100%;
-
-  &:hover {
-    border-left-color: $amber;
-    transform: translateY(-4px);
-    box-shadow: 0 16px 32px -16px rgba(0, 0, 0, 0.5);
-  }
-
-  .project-media {
-    aspect-ratio: 16 / 10;
-    background: $surface-2;
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .project-body {
-    padding: 1.5rem;
-  }
-
-  .project-status {
-    font-family: $font-family-monospace;
-    font-size: 0.75rem;
-    color: $text-muted;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-bottom: 0.75rem;
-
-    .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-    }
-
-    .dot-live {
-      background: #3FD97F;
-    }
-
-    .dot-progress {
-      background: $amber;
-    }
-  }
-
-  .project-title {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  .project-desc {
-    color: $text-muted;
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
-  .tag-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .tag-chip {
-    font-family: $font-family-monospace;
-    font-size: 0.72rem;
-    color: $teal;
-    background: rgba(79, 209, 197, 0.08);
-    border: 1px solid rgba(79, 209, 197, 0.2);
-    padding: 0.2rem 0.6rem;
-    border-radius: 999px;
-  }
-}
-
-// ============================================================
-// EXPERIENCE — vertical log/timeline, consistent with the
-// "build log" concept: dated entries, status dot, mono meta.
+// EXPERIENCE + EDUCATION — dated, so a real timeline
 // ============================================================
 .timeline {
-  position: relative;
-  padding-left: 2rem;
-  border-left: 1px solid $line;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .timeline-entry {
-  position: relative;
-  padding-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
 
-  &:last-child {
-    padding-bottom: 0;
-  }
-}
-
-.timeline-marker {
-  position: absolute;
-  left: -2.4rem;
-  top: 0.35rem;
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: block;
-    box-shadow: 0 0 0 4px $ink;
+  & + & {
+    border-top: 1px solid var(--rule);
   }
 
-  .dot-live {
-    background: #3FD97F;
-  }
-
-  .dot-progress {
-    background: $amber;
+  &:first-child {
+    padding-top: 0;
   }
 }
 
 .timeline-dates {
-  font-family: $font-family-monospace;
-  font-size: 0.78rem;
-  color: $text-muted;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.4rem;
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  margin: 0.2rem 0 0;
 }
 
 .timeline-title {
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   margin-bottom: 0.25rem;
 
-  .timeline-at {
-    font-weight: 400;
-    color: $teal;
+  span {
+    font-weight: 500;
   }
 }
 
 .timeline-location {
-  color: $text-muted;
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 0.6rem;
 }
 
 .timeline-points {
-  color: $text-muted;
-  font-size: 0.95rem;
-  padding-left: 1.1rem;
-  margin-bottom: 0;
+  padding-left: 1.05rem;
+  margin: 0;
+  max-width: var(--measure);
 
   li {
-    margin-bottom: 0.4rem;
-  }
-}
+    margin-bottom: 0.35rem;
 
-// ============================================================
-// EDUCATION — reuses the project-card shape for visual
-// consistency, without the media/tags that don't apply here.
-// ============================================================
-.edu-card {
-  background: $surface;
-  border: 1px solid $line;
-  border-left: 3px solid transparent;
-  border-radius: $border-radius-lg;
-  padding: 1.5rem;
-  height: 100%;
-  transition: border-left-color 0.2s ease, transform 0.2s ease;
-
-  &:hover {
-    border-left-color: $teal;
-    transform: translateY(-4px);
-  }
-
-  .edu-school {
-    color: $teal;
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-
-    a {
-      color: inherit;
+    &::marker {
+      color: var(--pass);
     }
   }
+}
 
-  .edu-meta {
-    font-family: $font-family-monospace;
-    font-size: 0.8rem;
-    color: $text-muted;
+@media (max-width: 575.98px) {
+  .timeline-entry {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
   }
 }
 
 // ============================================================
-// CONTACT
+// CONTACT — a dark band that closes the page
 // ============================================================
-.contact-section {
-  border-bottom: none;
+.contact {
+  background: var(--band);
+  color: var(--band-ink);
+  padding: 6.5rem 0 5rem;
 
-  .contact-card {
-    background: $surface;
-    border: 1px solid $line;
-    border-radius: $border-radius-lg;
-    padding: 3rem;
+  h2 {
+    color: var(--band-ink);
+    margin-bottom: 0.75rem;
   }
 
-  .contact-link {
-    font-family: $font-family-monospace;
-    font-size: 1rem;
-    color: $text;
-    border: 1px solid $line;
-    border-radius: $border-radius;
-    padding: 0.85rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    transition: border-color 0.15s ease, background 0.15s ease;
+  a {
+    color: var(--band-ink);
+  }
+
+  .btn-quiet {
+    background: transparent;
+    border-color: color-mix(in srgb, var(--band-ink) 30%, transparent);
+    color: var(--band-ink);
 
     &:hover {
-      color: $text;
-      border-color: $amber;
-      background: rgba(242, 179, 61, 0.06);
+      border-color: var(--band-ink);
+      color: var(--band-ink);
+    }
+  }
+}
+
+.contact-lede {
+  color: var(--band-muted);
+  font-size: 1.1rem;
+  max-width: var(--measure);
+  margin-bottom: 2rem;
+}
+
+.contact-email {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.25rem;
+  margin-bottom: 2rem;
+
+  a {
+    font-family: $headings-font-family;
+    font-size: clamp(1.5rem, 5vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+    word-break: break-all;
+
+    &:hover {
+      color: #6fd8a0;
+    }
+  }
+}
+
+.contact-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+
+  a {
+    font-weight: 600;
+    text-decoration-color: color-mix(in srgb, var(--band-ink) 40%, transparent);
+
+    &:hover {
+      text-decoration-color: var(--band-ink);
     }
   }
 }
@@ -510,8 +1087,20 @@ section {
 // FOOTER
 // ============================================================
 .site-footer {
-  padding: 2.5rem 0;
-  font-family: $font-family-monospace;
-  font-size: 0.8rem;
-  color: $text-muted;
+  background: var(--band);
+  border-top: 1px solid color-mix(in srgb, var(--band-ink) 12%, transparent);
+  padding: 1.75rem 0;
+  color: var(--band-muted);
+  font-size: 0.9rem;
+
+  a {
+    color: var(--band-ink);
+  }
+}
+
+.footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
 }

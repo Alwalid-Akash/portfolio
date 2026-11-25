@@ -1,37 +1,65 @@
-const CONTACT_LINKS = [
-  { label: 'alwalidakash@gmail.com', href: 'mailto:alwalidakash@gmail.com', icon: '✉' },
-  { label: 'github.com/Alwalid-Akash', href: 'https://github.com/Alwalid-Akash', icon: '⌥' },
-  { label: 'linkedin.com/in/Md Al Walid', href: 'https://linkedin.com/in/md-alwalid', icon: 'in' },
-];
+import { useEffect, useState } from 'react';
+
+const EMAIL = 'alwalidakash@gmail.com';
 
 function Contact() {
-  return (
-    <section id="contact" className="contact-section">
-      <div className="container">
-        <div className="contact-card">
-          <p className="eyebrow">04 — contact</p>
-          <h2 className="section-title">Let's work together</h2>
-          <p className="about-body mb-4">
-            I'm currently looking for a junior developer role. Reach out — I
-            reply quickly.
-          </p>
+  // 'idle' | 'copied' | 'failed'
+  const [copyState, setCopyState] = useState('idle');
 
-          <div className="row g-3">
-            {CONTACT_LINKS.map((link) => (
-              <div className="col-md-4" key={link.href}>
-                <a
-                  className="contact-link"
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <span>{link.icon}</span>
-                  {link.label}
-                </a>
-              </div>
-            ))}
-          </div>
+  // Reset the button label after 2 seconds, and clean up if the component unmounts
+  useEffect(() => {
+    if (copyState === 'idle') return undefined;
+    const timer = setTimeout(() => setCopyState('idle'), 2000);
+    return () => clearTimeout(timer);
+  }, [copyState]);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopyState('copied');
+    } catch {
+      setCopyState('failed');
+    }
+  };
+
+  const buttonLabel = { idle: 'Copy email', copied: 'Copied', failed: 'Copy failed' }[copyState];
+
+  return (
+    <section id="contact" className="section contact">
+      <div className="container">
+        <h2>Contact</h2>
+        <p className="contact-lede">
+          Hiring a working student or intern? Send me an email and I’ll get back to you quickly.
+        </p>
+
+        <div className="contact-email">
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <button type="button" className="btn-quiet btn-small" onClick={copyEmail}>
+            {buttonLabel}
+          </button>
+          <span className="visually-hidden" aria-live="polite">
+            {copyState === 'copied' ? 'Email address copied' : ''}
+            {copyState === 'failed' ? 'Could not copy. Select the address to copy it.' : ''}
+          </span>
         </div>
+
+        <ul className="contact-links">
+          <li>
+            <a href="https://github.com/Alwalid-Akash" target="_blank" rel="noreferrer">
+              GitHub
+            </a>
+          </li>
+          <li>
+            <a href="https://linkedin.com/in/md-alwalid" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a href="/Md_Al_Walid_CV.pdf" target="_blank" rel="noreferrer">
+              CV (PDF)
+            </a>
+          </li>
+        </ul>
       </div>
     </section>
   );

@@ -1,24 +1,36 @@
+// Grouped by how confident you are, strongest first.
+// `level` controls the style: 'daily' (filled), 'shipped' (outlined), 'learning' (dashed).
+
 const skillGroups = [
   {
-    label: 'Languages',
-    items: ['JavaScript (ES6+)', 'HTML5', 'CSS3', 'Pythone(Fundamental)', 'C (Fundamental)', 'CPP (Fundamental)'],
+    label: 'Use every day',
+    level: 'daily',
+    items: ['JavaScript (ES6+)', 'React', 'Node.js', 'Express', 'HTML and CSS', 'Bootstrap', 'Git and GitHub'],
   },
   {
-    label: 'Frameworks & Libraries',
-    items: ['React', 'Bootstrap', 'Node.js', 'Express.js'],
+    label: 'Have shipped projects with',
+    level: 'shipped',
+    items: [
+      'PostgreSQL',
+      'pgvector',
+      'MongoDB',
+      'REST APIs',
+      'Swagger / OpenAPI',
+      'JWT auth',
+      'Zod',
+      'Docker',
+      'GitHub Actions',
+      'Gemini API (tools, embeddings)',
+      'Vercel and Render',
+    ],
   },
   {
-    label: 'Databases',
-    items: ['PostgreSQL (Fundamentals)', 'MongoDB (Fundamentals)', 'SQL (Fundamentals)'],
-  },
-  {
-    label: 'Tools,  AI Tools, & Workflow',
-    items: ['GitHub', 'Docker', 'GitHub Actions (CI/CD)', 'GPT', 'VS Code', 'Claude (Beginer)'],
-  },
-  {
-    label: 'Currently learning',
-    items: ['GitHub Actions (CI/CD)', 'TyprScript'],
+    label: 'Learning now',
+    level: 'learning',
+    items: ['TypeScript', 'Frontend testing', 'German (A2)'],
   },
 ];
+
+export const skillsNote = 'Also: Python, C and C++ basics from university.';
 
 export default skillGroups;

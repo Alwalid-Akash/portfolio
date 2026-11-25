@@ -3,9 +3,14 @@ function Footer() {
 
   return (
     <footer className="site-footer">
-      <div className="container d-flex flex-column flex-sm-row justify-content-between gap-2">
-        <span>© {year} Md Al Walid.dev — built with React &amp; Bootstrap</span>
-        <span>deployed via Vercel</span>
+      <div className="container footer-inner">
+        <span>© {year} Md Al Walid</span>
+        <span>
+          Built with React, Vite and Bootstrap.{' '}
+          <a href="https://github.com/Alwalid-Akash/Portfolio" target="_blank" rel="noreferrer">
+            Source on GitHub
+          </a>
+        </span>
       </div>
     </footer>
   );

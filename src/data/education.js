@@ -1,27 +1,19 @@
-// Add/edit education here, most recent first.
-
 const education = [
   {
-    id: 1,
-    degree: 'MSc in Web Engineering',
+    id: 'tuc',
+    degree: 'MSc Web Engineering',
     school: 'Technische Universität Chemnitz',
-    location: 'Chemnitz, Germany',
-    start: 'Oct 2024',
-    end: 'Current',
-    current: true,
     link: 'https://www.tu-chemnitz.de/index.html.en',
-
+    location: 'Chemnitz, Germany',
+    period: 'Oct 2024 – now',
   },
   {
-    id: 2,
-    degree: 'BSc in Information & Communication Engineering (ICE)',
-    school: 'Bangladesh Army University of Engineering & Technology (BAUET)',
-    location: 'Natore, Bangladesh',
-    start: '2017',
-    end: '2022',
-    current: false,
+    id: 'bauet',
+    degree: 'BSc Information and Communication Engineering',
+    school: 'Bangladesh Army University of Engineering & Technology',
     link: 'https://bauet.ac.bd/',
-
+    location: 'Natore, Bangladesh',
+    period: '2017 – 2022',
   },
 ];
 
